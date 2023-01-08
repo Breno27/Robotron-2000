@@ -1,5 +1,8 @@
 const controle = document.querySelectorAll('[data-controle]')
 const estatisticas = document.querySelectorAll('[data-estatistica]')
+const robotron = document.querySelector('[data-robotron]')
+const botaoCor = document.querySelectorAll('[data-cores-btn]')
+const cores = document.querySelectorAll('[data-cores]')
 const pecas = {
     "bracos": {
         "forca": 29,
@@ -34,12 +37,20 @@ const pecas = {
     }
 }
 
+botaoCor.forEach( (cor) => {
+    cor.addEventListener('click', (evento) => {
+        robotron.src = evento.target.src
+    })
+})
+
 controle.forEach( (elemento) => {
     elemento.addEventListener('click', (evento) => { 
         manipulaDados(evento.target.dataset.controle, evento.target.parentNode)
         atualizaEstatisticas(evento.target.dataset.peca) 
     })
 })
+
+
 
 function manipulaDados(operacao, controle) {
     const peca = controle.querySelector('[data-contador]')
@@ -56,3 +67,4 @@ function atualizaEstatisticas(peca) {
         elemento.textContent = parseInt(elemento.textContent) + pecas[peca][elemento.dataset.estatistica]
     })
 }
+
